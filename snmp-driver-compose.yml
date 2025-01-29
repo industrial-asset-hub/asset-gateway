@@ -1,0 +1,22 @@
+#
+# Copyright (c) Siemens AG 2022 ALL RIGHTS RESERVED
+#
+# SNMP Asset link for Industrial Asset Hub
+# Depends on Industrial Asset Hub gateway
+services:
+  snmp-driver:
+    restart: always
+    image: 'ghcr.io/industrial-asset-hub/iah/snmp-driver:1.0.11'
+    networks:
+      - 01-cdm
+    mem_limit: 300mb
+    volumes:
+      - ./cfg-data:/shared-cfg/
+    command:
+      - '--grpc-address=0.0.0.0:8081'
+      - '--grpc-server-registry=grpc-server-registry:50051'
+
+networks:
+  01-cdm:
+    name: cdm
+    external: true

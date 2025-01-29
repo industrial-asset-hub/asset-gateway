@@ -1,0 +1,59 @@
+#
+# Copyright (c) Siemens AG 2022 ALL RIGHTS RESERVED
+#
+
+services:
+  auth-proxy-agent:
+    restart: always
+    image: 'ghcr.io/industrial-asset-hub/iah/auth-proxy-agent:1.1.3'
+    command: ["-gateway-version=1.2.1", "-root-ca-path=/certs/"]
+    networks:
+      - 01-cdm
+    volumes:
+      - cdm-cfg:/shared-cfg/
+      - ./cfg-data/:/cfg-data/
+      - certs:/certs/
+      # Injecting a custom certificate authority (CA)
+      # For example, to allow traffic passing a corporate proxy. The proxy
+      # uses certificates from a corporate CA.
+      # -./my-ca.crt:/etc/ssl/certs/my-ca.crt
+
+  discovery-agent:
+    restart: always
+    image: 'ghcr.io/industrial-asset-hub/iah/discovery-agent:1.1.8'
+    command: ["-wfx-service=auth-proxy-agent/wfx-southbound/", "-inventory-api-service-address=auth-proxy-agent/inventory/", "-grpc-server-registry=grpc-server-registry:50051"]
+    networks:
+      - 01-cdm
+    volumes:
+      - cdm-cfg:/shared-cfg/
+    depends_on:
+      - auth-proxy-agent
+
+  remote-access-agent:
+    restart: always
+    image: 'ghcr.io/industrial-asset-hub/iah/remote-access-agent:1.1.8'
+    command: ["-wfx-handler=auth-proxy-agent/wfx-southbound/", "-remote-access-service-address=auth-proxy-agent/remote-access", "-max-retry-count=4"]
+    networks:
+      - 01-cdm
+    volumes:
+      - cdm-cfg:/shared-cfg/
+    depends_on:
+      - auth-proxy-agent
+
+  grpc-server-registry:
+    restart: always
+    image: 'ghcr.io/industrial-asset-hub/iah/grpc-server-registry:0.1.6'
+    networks:
+      - 01-cdm
+    ports:
+      - "50051:50051"
+
+networks:
+  01-cdm:
+    name: cdm
+
+volumes:
+  cdm-cfg:
+    name: cdm-cfg
+  certs:
+    name: cdm-certs

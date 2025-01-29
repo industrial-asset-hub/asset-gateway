@@ -76,7 +76,13 @@ configuration
 3. To run your Asset Gateway execute
 
 ```bash
-docker-compose up -d
+docker-compose -f gateway-compose.yml -d up --force-recreate
+```
+
+4. To start Asset links start like this
+
+```bash
+docker-compose -f snmp-driver-compose.yml -f dummy-driver-compose.yml up -d --force-recreate
 ```
 
 ### Adding an Asset Link
