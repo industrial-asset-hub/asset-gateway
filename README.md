@@ -49,9 +49,9 @@ Check prerequisites (docker engine and compose to be present) and execute the fo
 # Create a config folder
 mkdir -p cfg-data
 # Get compose files
-wget https://github.com/industrial-asset-hub/asset-gateway/gateway-compose.yml
-wget https://github.com/industrial-asset-hub/asset-gateway/snmp-driver-compose.yml
-wget https://github.com/industrial-asset-hub/asset-gateway/dummy-driver-compose.yml
+wget https://raw.githubusercontent.com/industrial-asset-hub/asset-gateway/refs/heads/main/gateway-compose.yml
+wget https://raw.githubusercontent.com/industrial-asset-hub/asset-gateway/refs/heads/main/snmp-driver-compose.yml
+wget https://raw.githubusercontent.com/industrial-asset-hub/asset-gateway/refs/heads/main/dummy-driver-compose.yml
 # Start the Asset Gateway
 docker-compose -f gateway-compose.yml up --force-recreate
 # Start a dummy driver for testing purposes (optional)
