@@ -12,6 +12,9 @@ services:
     networks:
       - 01-cdm
     mem_limit: 300mb
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
     volumes:
       - ./cfg-data:/shared-cfg/
     command:
