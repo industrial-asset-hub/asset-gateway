@@ -52,9 +52,9 @@ mkdir -p cfg-data
 wget https://raw.githubusercontent.com/industrial-asset-hub/asset-gateway/refs/heads/main/gateway-compose.yml
 wget https://raw.githubusercontent.com/industrial-asset-hub/asset-gateway/refs/heads/main/snmp-driver-compose.yml
 # Start the Asset Gateway
-docker-compose -f gateway-compose.yml up --force-recreate
+sudo docker compose -f gateway-compose.yml up --force-recreate
 # Start a SNMP driver for testing purposes (optional)
-docker-compose -f snmp-driver-compose.yml up --force-recreate
+sudo docker compose -f snmp-driver-compose.yml up --force-recreate
 ```
 
  Refere to our github presence here: [Asset Gateway](https://github.com/industrial-asset-hub/asset-gateway).
