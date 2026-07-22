@@ -8,7 +8,7 @@ services:
   auth-proxy-agent:
     restart: always
     image: 'ghcr.io/industrial-asset-hub/iah/auth-proxy-agent:1.3.8'
-    command: ["-gateway-version=", "-root-ca-path=/certs/", "-partner-app-proxy=ams-authproxy-agent.cdm-proxy-redirect."]
+    command: ["-gateway-version=1.6.2", "-root-ca-path=/certs/", "-partner-app-proxy=ams-authproxy-agent.cdm-proxy-redirect."]
     networks:
       - 01-cdm
       - cdm-proxy-redirect
