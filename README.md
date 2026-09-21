@@ -109,4 +109,4 @@ The provided asset gateway is composed of several docker components provided wit
 Detailed license information to the respective containers are provided within these files:
 
 - [AssetGateway containers](SiemensIndustrialAssetHub-AssetGateway__1.7.3__READMEOSS.html)
-- [Snmp Asset Link container](SiemensIndustrialAssetHub-AssetLinkSNMP__1.6__READMEOSS.html)
+- [Snmp Asset Link container](SiemensIndustrialAssetHub-AssetLinkSNMP__1.7__READMEOSS.html)
