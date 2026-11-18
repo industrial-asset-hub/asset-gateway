@@ -108,5 +108,8 @@ The provided asset gateway is composed of several docker components provided wit
 [industrial-asset-hub organization](https://github.com/industrial-asset-hub) on GitHub.
 Detailed license information to the respective containers are provided within these files:
 
-- [AssetGateway containers](SiemensIndustrialAssetHub-AssetGateway__1.7.3__READMEOSS.html)
+- [AssetGateway containers](SiemensIndustrialAssetHub-AssetGateway__1.7.6__READMEOSS.html)
 - [Snmp Asset Link container](SiemensIndustrialAssetHub-AssetLinkSNMP__1.7__READMEOSS.html)
+
+The source code of the open source components of the AssetGateway containers is attached to the
+[GitHub release](https://github.com/industrial-asset-hub/asset-gateway/releases) of the respective version.
