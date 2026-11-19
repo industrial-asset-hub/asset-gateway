@@ -8,7 +8,7 @@
 services:
   snmp-driver:
     restart: always
-    image: 'ghcr.io/industrial-asset-hub/iah/snmp-driver:1.7.0'
+    image: 'ghcr.io/industrial-asset-hub/iah/snmp-driver:1.7.0@sha256:0acf4f7700c37202276eeb094cefdacffa578815ac572215a6cddf3c621d0ca5'
     networks:
       - 01-cdm
     mem_limit: 300mb
