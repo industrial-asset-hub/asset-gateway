@@ -7,8 +7,8 @@
 services:
   auth-proxy-agent:
     restart: always
-    image: 'ghcr.io/industrial-asset-hub/iah/auth-proxy-agent:1.4.2'
-    command: ["-gateway-version=1.7.3", "-root-ca-path=/certs/", "-partner-app-proxy=ams-authproxy-agent.cdm-proxy-redirect.", "-grpc-registry-address=grpc-server-registry:50051"]
+    image: 'ghcr.io/industrial-asset-hub/iah/auth-proxy-agent:1.7.6@sha256:9f34622f81f0fbb490f5dcf340db4c4c959a9f473445108020debdbde9e3ab59'
+    command: ["-gateway-version=1.7.6", "-root-ca-path=/certs/", "-partner-app-proxy=ams-authproxy-agent.cdm-proxy-redirect.", "-grpc-registry-address=grpc-server-registry:50051"]
     networks:
       - 01-cdm
       - cdm-proxy-redirect
@@ -25,7 +25,7 @@ services:
 
   wfx-agent:
     restart: always
-    image: 'ghcr.io/industrial-asset-hub/iah/wfx-agent:1.0.3'
+    image: 'ghcr.io/industrial-asset-hub/iah/wfx-agent:1.7.6@sha256:c89ceddec373bb1ca5658041b6283200146716c2f8a963119a62f58d9ace4e4e'
     environment:
       - PORT=8060
       - AGENT_POLLING_INTERVAL=10
@@ -40,7 +40,7 @@ services:
 
   discovery-agent:
     restart: always
-    image: 'ghcr.io/industrial-asset-hub/iah/discovery-agent:1.4.4'
+    image: 'ghcr.io/industrial-asset-hub/iah/discovery-agent:1.7.6@sha256:9ef1d39764e08eca10810cd2c7bb42934f4beeb7c32a5bee77ea4b5d71677446'
     command: ["-wfx-service=wfx-agent:8060", "-inventory-api-service-address=auth-proxy-agent/inventory/", "-grpc-server-registry=grpc-server-registry:50051", "-credential-storage-api-service-address=auth-proxy-agent/credentials", "-gateway-network-provisioner-address=host.docker.internal:18080/network"]
     networks:
       - 01-cdm
@@ -53,7 +53,7 @@ services:
 
   remote-access-agent:
     restart: always
-    image: 'ghcr.io/industrial-asset-hub/iah/remote-access-agent:1.2.2'
+    image: 'ghcr.io/industrial-asset-hub/iah/remote-access-agent:1.7.6@sha256:54b8e9dc5d2de766171d8a083e7720c8384af3f6fa0c6208f9c24ee5b1103726'
     command: ["-wfx-handler=wfx-agent:8060", "-remote-access-service-address=auth-proxy-agent/remote-access", "-max-retry-count=4"]
     networks:
       - 01-cdm
@@ -64,7 +64,7 @@ services:
 
   grpc-server-registry:
     restart: always
-    image: 'ghcr.io/industrial-asset-hub/iah/grpc-server-registry:0.1.20'
+    image: 'ghcr.io/industrial-asset-hub/iah/grpc-server-registry:1.7.6@sha256:f21f3de4865afaabaa4e773032c488bb74fc7d91a0244c37c2e098c4ba6dbbf6'
     networks:
       - 01-cdm
     ports:
@@ -72,7 +72,7 @@ services:
 
   default-ip-scanner:
     restart: always
-    image: 'ghcr.io/industrial-asset-hub/iah/generic-asset-scanner:1.6.0'
+    image: 'ghcr.io/industrial-asset-hub/iah/generic-asset-scanner:1.7.6@sha256:e60dc6e2c107dea7cf5f83cb43770570f7eb5f382f78bfe30012f67a3e05f219'
     network_mode: host
     cap_add:
       - SYS_ADMIN
@@ -88,7 +88,7 @@ services:
       - '-grpc-registry-address=localhost:50051'
 
   native-os-al:
-      image: 'ghcr.io/industrial-asset-hub/iah/native-os-al:3.0.3'
+      image: 'ghcr.io/industrial-asset-hub/iah/native-os-al:1.7.6@sha256:95a68a4293726b0eec38951f9cd3551aced08fa7ea7c112b2331d4a93a750691'
       volumes:
         - cdm-cfg:/shared-cfg/:ro
       networks:
@@ -110,7 +110,7 @@ services:
 
   gateway-network-provisioner:
       restart: always
-      image: 'ghcr.io/industrial-asset-hub/iah/gateway-network-provisioner:0.1.3'
+      image: 'ghcr.io/industrial-asset-hub/iah/gateway-network-provisioner:1.7.6@sha256:e11a7ba57b4e293c04309eca61926ddde60b2e129d20ce0bce35743a14905054'
       network_mode: host  # HTTP REST API available on host port 18080
       cap_add:
         - NET_ADMIN
